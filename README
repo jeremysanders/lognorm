@@ -1,0 +1,50 @@
+An Xspec model for a log-normal distribution
+--------------------------------------------
+Jeremy Sanders
+
+This model is a model for a log-normal distribution of temperature
+components. As the width of the distribution decreases, it converges
+to a single temperature component.
+
+N different temperature components are summed (default N=21). These
+have temperatures evenly-spaced in log-temperature between -M*logsigma
+and +M*logsigma (default M=3). The normalisation (emission measure) of
+the components is proportional to
+exp(-0.5*((logT_i-logT_central)/logsigma)**2, but normalised to sum to
+1.
+
+There are two models included. lognorm sums apec components with solar
+abundance ratios. vlognorm allows individual elemental abundances.
+
+Parameters:
+
+kT - central temperature of the distribution
+logsigma - width of the distribution (note: log base e, not log base 10)
+Abundanc - standard solar relative abundances
+Redshift - redshift of components
+norm - total normalisation of the components
+
+xset variables to modify behaviour:
+
+LOGNORM_NTEMPS: number of temperature components, N (default 21)
+LOGNORM_MAXSIGMA: number of sigma to include, M (default 3)
+
+Setting chatter to 15 will show which the temperature and
+normalisations of the individual components.
+
+
+Build instructions
+------------------
+
+Please see the Xspec manual on how to build user models. You can do
+something like this to build from source:
+
+XSPEC>initpackage lognorm lmodel.dat dir_name
+
+And to load use this
+
+XSPEC>lmod lognorm dir_name
+
+Where dir_name is where the source is located.
+
+The model may need rebuilding for different Xspec versions
