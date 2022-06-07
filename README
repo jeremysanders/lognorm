@@ -10,8 +10,9 @@ N different temperature components are summed (default N=21). These
 have temperatures evenly-spaced in log-temperature between
 logT_central-M*logsigma and logT_central+M*logsigma (default M=3). The
 normalisation (emission measure) of the components is proportional to
-exp(-0.5*((logT_i-logT_central)/logsigma)**2, but normalised to sum to
+exp(-0.5*((logT_i-logT_central)/logsigma)**2), but normalised to sum to
 1. Please note the usage of log base-e, rather than base-10.
+
 
 There are two models included. lognorm sums apec components with solar
 abundance ratios. vlognorm allows individual elemental abundances.
@@ -19,7 +20,7 @@ abundance ratios. vlognorm allows individual elemental abundances.
 Parameters for lognorm:
 
 kT - central temperature of the distribution
-logsigma - width of the distribution (note: log base e, not log base 10)
+logsigma - width of the distribution (note: log base-e, not log base-10)
 Abundanc - standard solar relative abundances
 Redshift - redshift of components
 norm - total normalisation of the components
@@ -31,6 +32,17 @@ LOGNORM_MAXSIGMA: number of sigma to include, M (default 3)
 
 Setting chatter to 15 will show which the temperature and
 normalisations of the individual components.
+
+For example, if LOGNORM_NTEMS=5, and LOGNORM_MAXSIGMA=2, for a central
+temperature of 10 keV and logsigma=0.1, then the following
+temperatures (keV) and relative emission measures are produced (before
+normalisation):
+
+T=8.18731 em=0.135335
+T=9.04837 em=0.606531
+T=10 em=1
+T=11.0517 em=0.606531
+T=12.214 em=0.135335
 
 
 Build instructions
