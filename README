@@ -2,21 +2,21 @@ An Xspec model for a log-normal distribution
 --------------------------------------------
 Jeremy Sanders
 
-This model is a model for a log-normal distribution of temperature
-components. As the width of the distribution decreases, it converges
-to a single temperature component.
+This model is a spectral model for a log-normal distribution of
+temperature components. As the width of the distribution decreases, it
+converges to a single temperature component.
 
 N different temperature components are summed (default N=21). These
-have temperatures evenly-spaced in log-temperature between -M*logsigma
-and +M*logsigma (default M=3). The normalisation (emission measure) of
-the components is proportional to
+have temperatures evenly-spaced in log-temperature between
+logT_central-M*logsigma and logT_central+M*logsigma (default M=3). The
+normalisation (emission measure) of the components is proportional to
 exp(-0.5*((logT_i-logT_central)/logsigma)**2, but normalised to sum to
-1.
+1. Please note the usage of log base-e, rather than base-10.
 
 There are two models included. lognorm sums apec components with solar
 abundance ratios. vlognorm allows individual elemental abundances.
 
-Parameters:
+Parameters for lognorm:
 
 kT - central temperature of the distribution
 logsigma - width of the distribution (note: log base e, not log base 10)
