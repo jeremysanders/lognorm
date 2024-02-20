@@ -89,6 +89,7 @@ namespace
 		   float z,
 		   const std::valarray<float>& temps,
 		   const std::valarray<float>& dem,
+           float velocity,
 		   RealArray& flux)
   {
     // copy energies to floats
@@ -108,7 +109,7 @@ namespace
     int earsize = ear.size()-1;
     int ifl = 1;
     int qintherm = 1;
-    float velocity = 0.;
+    //float velocity = 0.;
     int status = 0;
     sumdem_( &itype, &swtch, &(ear[0]), &earsize,
 	     const_cast<float*>(&(abun[0])), &dens, &z,
@@ -125,7 +126,7 @@ namespace
   // compute the model given abundances
   void inner_calc(const RealArray& energy, RealArray& flux,
                   const valarray<float>& abun,
-                  double kT, double logsigma, double redshift)
+                  double kT, double logsigma, double redshift, double velocity)
   {
     const size_t numsteps = get_num_steps();
     const double maxsigma = get_max_sigma();
@@ -169,7 +170,7 @@ namespace
       }
 
     // have to copy arrays to floats to send to sumdem
-    calc_sumdem(energy, abun, redshift, arry_T, arry_dem, flux);
+    calc_sumdem(energy, abun, redshift, arry_T, arry_dem, velocity, flux);
   }
 
 }
@@ -186,6 +187,7 @@ extern "C" void clclognorm(const RealArray& energy,
   const double logsigma = parameter[1];
   const double Z = parameter[2];
   const double redshift = parameter[3];
+  const double velocity = 0.;
 
   // need abundances as floats :-(
   valarray<float> abun(13);
@@ -193,7 +195,7 @@ extern "C" void clclognorm(const RealArray& energy,
   for(size_t i = 1; i != 13; ++i)
     abun[i] = Z;
 
-  inner_calc(energy, flux, abun, kT, logsigma, redshift);
+  inner_calc(energy, flux, abun, kT, logsigma, redshift, velocity);
 }
 
 extern "C" void clcvlognorm(const RealArray& energy,
@@ -206,13 +208,57 @@ extern "C" void clcvlognorm(const RealArray& energy,
 {
   const double kT = parameter[0];
   const double logsigma = parameter[1];
-
+  const double velocity = 0.;
+    
   valarray<float> abun(13);
   for(size_t i = 0; i != 13; ++i)
     abun[i] = parameter[i+2];
 
   const double redshift = parameter[15];
 
-  inner_calc(energy, flux, abun, kT, logsigma, redshift);
+  inner_calc(energy, flux, abun, kT, logsigma, redshift, velocity);
 }
 
+extern "C" void clcblognorm(const RealArray& energy,
+                           const RealArray& parameter,
+                           int spectrum,
+                           RealArray& flux,
+                           RealArray& fluxError,
+                           const string& init)
+
+{
+  const double kT = parameter[0];
+  const double logsigma = parameter[1];
+  const double Z = parameter[2];
+  const double redshift = parameter[3];
+  const double velocity = parameter[4];
+
+  // need abundances as floats :-(
+  valarray<float> abun(13);
+  abun[0] = 1.0;  // He
+  for(size_t i = 1; i != 13; ++i)
+    abun[i] = Z;
+
+  inner_calc(energy, flux, abun, kT, logsigma, redshift, velocity);
+}
+
+extern "C" void clcbvlognorm(const RealArray& energy,
+                            const RealArray& parameter,
+                            int spectrum,
+                            RealArray& flux,
+                            RealArray& fluxError,
+                            const string& init)
+
+{
+  const double kT = parameter[0];
+  const double logsigma = parameter[1];
+    
+  valarray<float> abun(13);
+  for(size_t i = 0; i != 13; ++i)
+    abun[i] = parameter[i+2];
+
+  const double redshift = parameter[15];
+  const double velocity = parameter[16];
+
+  inner_calc(energy, flux, abun, kT, logsigma, redshift, velocity);
+}
