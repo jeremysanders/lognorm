@@ -1,0 +1,74 @@
+# An Xspec model for a log-normal temperature distribution
+
+Jeremy Sanders
+
+This model is a spectral model for a log-normal distribution of `apec`
+temperature components. As the width of the distribution decreases, it
+converges to a single temperature component.
+
+`N` different temperature components are summed (default `N=21`). These
+have temperatures evenly-spaced in log-temperature between
+`logT_central-M*logsigma` and `logT_central+M*logsigma` (default `M=3`). The
+normalisation (emission measure) of the components is proportional to
+
+```text
+exp(-0.5*((logT_i-logT_central)/logsigma)**2)
+```
+
+but then normalised to sum to 1. Please note the usage of log base-e, rather
+than base-10.
+
+There are four models included:
+
+- `lognorm` sums `apec` components with solar abundance ratios.
+- `vlognorm` allows individual elemental abundances.
+- `blognorm` same as `lognorm`, but also with a velocity width parameter
+- `bvlognorm` same as `vlognorm`, but also with a velocity width parameter
+
+## Parameters for `lognorm`
+
+- `kT` - central temperature of the distribution
+- `logsigma` - width of the distribution (note: log base-e, not log base-10)
+- `Abundanc` - standard solar relative abundances
+- `Redshift` - redshift of components
+- `norm` - total normalisation of the components
+
+## xset variables to modify behaviour
+
+- `LOGNORM_NTEMPS`: number of temperature components, `N` (default `21`)
+- `LOGNORM_MAXSIGMA`: number of sigma to include, `M` (default `3`)
+
+Setting chatter to `15` will show the temperature and
+normalisations of the individual components.
+
+For example, if `LOGNORM_NTEMPS=5`, and `LOGNORM_MAXSIGMA=2`, for a central
+temperature of `10 keV` and `logsigma=0.1`, then the following
+temperatures (keV) and relative emission measures are produced (before
+normalisation):
+
+```text
+T=8.18731 em=0.135335
+T=9.04837 em=0.606531
+T=10 em=1
+T=11.0517 em=0.606531
+T=12.214 em=0.135335
+```
+
+# Build instructions
+
+Please see the Xspec manual on how to build user models. You can do
+something like this to build from source from within Xspec:
+
+```text
+XSPEC>initpackage lognorm lmodel.dat dir_name
+```
+
+And to load use this:
+
+```text
+XSPEC>lmod lognorm dir_name
+```
+
+Where `dir_name` is where the source is located.
+
+The model may need rebuilding for different Xspec versions.
