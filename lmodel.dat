@@ -1,11 +1,11 @@
-lognorm          4  0.         1.e20           C_clclognorm add  0
-kT      keV     4.    0.0808  0.0808 79.9      79.9       0.001
+lognorm         4      0.      1.e20           C_clclognorm add  0 0
+kT       keV    4.    0.0808  0.0808 79.9    79.9       0.001
 logsigma " "    0.1   1e-6    1e-6 4.        4.          0.01
 Abundanc " "    1.0   0.      0.   10.       10.          0.01
 Redshift " "    0.    0.      0.   10.       10.         -0.01
 
-vlognorm        16  0.         1.e20           C_clcvlognorm add  0
-kT      keV     4.    0.0808  0.0808 79.9      79.9       0.001
+vlognorm        16  0.         1.e20           C_clcvlognorm add  0 0
+kT       keV    4.    0.0808  0.0808 79.9    79.9       0.001
 logsigma " "    0.1   1e-6    1e-6 4.        4.          0.01
 He       " "    1.    0.      0.   1000.     1000.       -0.01
 C        " "    1.    0.      0.   1000.     1000.       -0.01
@@ -22,15 +22,15 @@ Fe       " "    1.    0.      0.   1000.     1000.       -0.01
 Ni       " "    1.    0.      0.   1000.     1000.       -0.01
 Redshift " "    0.    0.      0.   10.       10.         -0.01
 
-blognorm          5  0.         1.e20           C_clcblognorm add  0
-kT      keV     4.    0.0808  0.0808 79.9      79.9       0.001
+blognorm          5  0.         1.e20           C_clcblognorm add  0 0
+kT       keV     4.    0.0808  0.0808 79.9   79.9       0.001
 logsigma " "    0.1   1e-6    1e-6 4.        4.          0.01
 Abundanc " "    1.0   0.      0.   10.       10.          0.01
 Redshift " "    0.    0.      0.   10.       10.         -0.01
-Velocity km/s    0.    0.      0.   10000.       10000.         -0.01
+Velocity km/s   0.    0.      0.   10000.    10000.      -0.01
 
-bvlognorm        17  0.         1.e20           C_clcbvlognorm add  0
-kT      keV     4.    0.0808  0.0808 79.9      79.9       0.001
+bvlognorm        17  0.         1.e20           C_clcbvlognorm add  0 0
+kT       keV    4.    0.0808  0.0808 79.9    79.9       0.001
 logsigma " "    0.1   1e-6    1e-6 4.        4.          0.01
 He       " "    1.    0.      0.   1000.     1000.       -0.01
 C        " "    1.    0.      0.   1000.     1000.       -0.01
@@ -46,5 +46,4 @@ Ca       " "    1.    0.      0.   1000.     1000.       -0.01
 Fe       " "    1.    0.      0.   1000.     1000.       -0.01
 Ni       " "    1.    0.      0.   1000.     1000.       -0.01
 Redshift " "    0.    0.      0.   10.       10.         -0.01
-Velocity km/s    0.    0.      0.   10000.       10000.         -0.01
-
+Velocity km/s   0.    0.      0.   10000.    10000.      -0.01
