@@ -68,7 +68,7 @@ namespace
     if ( maxsigmaval != FunctionUtility::NOT_A_KEY() )
       {
         // get number of steps if set
-        size_t tempsigma;
+        Real tempsigma;
         istringstream buffer(maxsigmaval);
 
         buffer >> tempsigma;
